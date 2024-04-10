@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 
-using namespace sf;
 
 const int M = 20;
 const int N = 10;
@@ -40,14 +39,14 @@ int main()
 {
     srand(time(0));
 
-    RenderWindow window(VideoMode(N * w, M * w), "Tetris");
+    sf::RenderWindow window(sf::VideoMode(N * w, M * w), "Tetris");
 
     // Load Texture
-    Texture t;
+    sf::Texture t;
     t.loadFromFile("assets/tiles.png");
     
     // Create Sprite
-    Sprite tiles(t);
+    sf::Sprite tiles(t);
 
     int dx = 0;
     int colorNum = 1;
@@ -55,7 +54,7 @@ int main()
 
     float timer = 0, delay = 0.3;
 
-    Clock clock;
+    sf::Clock clock;
     bool ad = true;
 
     while (window.isOpen())
@@ -64,22 +63,22 @@ int main()
         clock.restart();
         timer += time;
 
-        Event event;
+        sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == Event::Closed)
+            if (event.type == sf::Event::Closed)
                 window.close();
-            if (event.type == Event::KeyPressed)
-                if (event.key.code == Keyboard::Up)
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::Up)
                     rotate = true;
-                else if (event.key.code == Keyboard::Right)
+                else if (event.key.code == sf::Keyboard::Right)
                     dx = 1;
-                else if (event.key.code == Keyboard::Left)
+                else if (event.key.code == sf::Keyboard::Left)
                     dx = -1;
         }
 
 
-        if (Keyboard::isKeyPressed(Keyboard::Down))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             delay = 0.05;
 
         for (int i = 0; i < 4; i++) {
@@ -155,19 +154,19 @@ int main()
         rotate = false;
         delay = 0.3;
 
-        window.clear(Color::White);
+        window.clear(sf::Color::White);
 
         for (int i = 0; i < M; i++)
             for (int j = 0; j < N; j++) {
                 if (field[i][j] == 0)
                     continue;
-                tiles.setTextureRect(IntRect(field[i][j] * w, 0, w, w));
+                tiles.setTextureRect(sf::IntRect(field[i][j] * w, 0, w, w));
                 tiles.setPosition(j * w, i * w);
                 window.draw(tiles);
             }
 
         for (int i = 0; i < 4; i++) {
-            tiles.setTextureRect(IntRect(colorNum * w, 0, w, w));
+            tiles.setTextureRect(sf::IntRect(colorNum * w, 0, w, w));
             tiles.setPosition(a[i].x * w, a[i].y * w);
             window.draw(tiles);
         }
