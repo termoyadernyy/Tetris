@@ -1,0 +1,19 @@
+$(SolutionDir)thirdparty\SFML\include;$(IncludePath)
+$(SolutionDir)thirdparty\SFML\lib;$(LibraryPath)
+
+sfml-graphics-s.lib //-d
+sfml-window-s.lib	//-d
+sfml-system-s.lib	//-d
+sfml-network-s.lib	//-d
+sfml-audio-s.lib	//-d
+opengl32.lib
+freetype.lib
+winmm.lib
+gdi32.lib	
+openal32.lib
+flac.lib
+vorbisenc.lib
+vorbisfile.lib
+vorbis.lib
+ogg.lib	
+ws2_32.lib	
